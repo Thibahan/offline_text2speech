@@ -1,7 +1,17 @@
 import pyttsx3
 
 
-def get_language_id(language):
+def get_language_id(language: str) -> str:
+    """This function will return the id of the language package.
+    It will search in the language packages of the operating system in the name and laguages
+    attributes.
+
+    Args:
+        language (str): Language to get the ID of.
+
+    Returns:
+        str: ID of the language. Will return None, if language not found.
+    """
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     for voice in voices:
