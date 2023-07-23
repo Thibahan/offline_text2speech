@@ -1,19 +1,31 @@
 import pyttsx3
+from utils import get_language_id
 
-# One time initialization
-engine = pyttsx3.init()
 
-engine.setProperty('voice', "german")
-engine.setProperty('rate', 150)
-engine.setProperty('volume', 0.9)
 
-text = "Hallo. Wie geht es dir? Mir geht es gut!"
+def create_file(text, language="german",
+                rate= 150, volume= 0.9,
+                output_file="output.flac"):
+    language_id = get_language_id(language)
 
-# Save the spoken text to an audio file
-engine.save_to_file(text, 'output.flac')
+    # One time initialization
+    engine = pyttsx3.init()
 
-# Run engine
-engine.runAndWait()
+    # Set properties voice, speed and volume
+    engine.setProperty('voice', language_id)
+    engine.setProperty('rate', rate)
+    engine.setProperty('volume', volume)
 
-# Disconnect the TTS engine
-engine.stop()
+    # Save the spoken text to an audio file
+    engine.save_to_file(text, output_file)
+
+    # Run engine
+    engine.runAndWait()
+
+    # Disconnect the TTS engine
+    engine.stop()
+
+
+if __name__ == '__main__':
+    text = "Hallo, wie gehts?"
+    create_file(text)
