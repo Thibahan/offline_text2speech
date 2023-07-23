@@ -1,9 +1,10 @@
 import pyttsx3
 from utils import get_language_id
+import os
 
 
 
-def create_file(text, language="german",
+def create_file(text: str, language="german",
                 rate= 150, volume= 0.9,
                 output_file="output.flac"):
     language_id = get_language_id(language)
@@ -24,8 +25,10 @@ def create_file(text, language="german",
 
     # Disconnect the TTS engine
     engine.stop()
+    return os.path.abspath(output_file)
 
 
 if __name__ == '__main__':
     text = "Hallo, wie gehts?"
-    create_file(text)
+    path = create_file(text)
+    print(path)
